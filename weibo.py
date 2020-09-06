@@ -57,7 +57,7 @@ class Client(object):
             "client_id": self.client_id,
             "redirect_uri": self.redirect_uri,
         }
-        return "{0}?{1}".format(self.authorization_url, urlencode(params))
+        return f"{self.authorization_url}?{urlencode(params)}"
 
     @property
     def alive(self):
@@ -80,7 +80,7 @@ class Client(object):
         token = json.loads(res.text)
         self._assert_error(token)
 
-        token[u"expires_at"] = int(time.time()) + int(token.pop(u"expires_in"))
+        token["expires_at"] = int(time.time()) + int(token.pop("expires_in"))
         self.set_token(token)
 
     def set_token(self, token):
@@ -99,13 +99,13 @@ class Client(object):
         """
         if "error_code" in d and "error" in d:
             raise RuntimeError(
-                "{0} {1}".format(d.get("error_code", ""), d.get("error", ""))
+                f"{d.get('error_code', '')} {d.get('error', '')}"
             )
 
     def get(self, uri, **kwargs):
         """Request resource by get method.
         """
-        url = "{0}{1}.json".format(self.api_url, uri)
+        url = f"{self.api_url}{uri}.json"
 
         # for username/password client auth
         if self.session.auth:
@@ -118,7 +118,7 @@ class Client(object):
     def post(self, uri, **kwargs):
         """Request resource by post method.
         """
-        url = "{0}{1}.json".format(self.api_url, uri)
+        url = f"{self.api_url}{uri}.json"
 
         # for username/password client auth
         if self.session.auth:
