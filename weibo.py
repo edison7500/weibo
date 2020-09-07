@@ -16,7 +16,6 @@ try:
 except ImportError:
     from urllib import urlencode
 
-import json
 import time
 
 import requests
@@ -77,9 +76,8 @@ class Client(object):
             "redirect_uri": self.redirect_uri,
         }
         res = requests.post(self.token_url, data=params)
-        token = json.loads(res.text)
+        token = res.json()
         self._assert_error(token)
-
         token["expires_at"] = int(time.time()) + int(token.pop("expires_in"))
         self.set_token(token)
 
@@ -111,7 +109,7 @@ class Client(object):
         if self.session.auth:
             kwargs["source"] = self.client_id
 
-        res = json.loads(self.session.get(url, params=kwargs).text)
+        res = self.session.get(url, params=kwargs).json()
         self._assert_error(res)
         return res
 
@@ -125,11 +123,9 @@ class Client(object):
             kwargs["source"] = self.client_id
 
         if "pic" not in kwargs:
-            res = json.loads(self.session.post(url, data=kwargs).text)
+            res = self.session.post(url, data=kwargs).json()
         else:
             files = {"pic": kwargs.pop("pic")}
-            res = json.loads(
-                self.session.post(url, data=kwargs, files=files).text
-            )
+            res = self.session.post(url, data=kwargs, files=files).json()
         self._assert_error(res)
         return res
