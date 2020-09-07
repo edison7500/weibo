@@ -13,7 +13,7 @@ setup(
     url="http://lxyu.github.io/weibo/",
     license="BSD",
     long_description=open("README.rst").read(),
-    install_requires=["requests>=2.4.0",],
+    install_requires=["requests>=2.10.0",],
     classifiers=[
         "Topic :: Software Development",
         "Development Status :: 5 - Production/Stable",
