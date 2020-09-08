@@ -11,14 +11,10 @@ http://lxyu.github.io/weibo/
 
 from __future__ import absolute_import
 
-try:
-    from urllib.parse import urlencode
-except ImportError:
-    from urllib import urlencode
-
 import time
-
 import requests
+
+from urllib.parse import urlencode
 
 
 class Client(object):
