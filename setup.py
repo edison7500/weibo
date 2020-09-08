@@ -4,8 +4,8 @@
 from setuptools import setup
 
 setup(
-    name="weibo",
-    version="0.2.2",
+    name="weibo-ng",
+    version="0.1.0",
     description="Python sina weibo sdk",
     author="Lx Yu",
     author_email="i@lxyu.net",
