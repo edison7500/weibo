@@ -85,11 +85,11 @@ client 初始化完成。token 可以被保存下来供下次调用时直接使�
 .. code:: python
 
     >>> c.get('users/show', uid=1282440983)
-    >>> c.post('statuses/update', status='python sdk test, check out http://lxyu.github.io/weibo/')
+    >>> c.post('statuses/share', status='python sdk test, check out http://lxyu.github.io/weibo/')
 
 client 兼容上传图片接口。
 
 .. code:: python
 
     >>> f = open('avatar.png', 'rb')
-    >>> c.post('statuses/upload', status='new avatar!', pic=f)
+    >>> c.post('statuses/share', status='new avatar!', pic=f)
